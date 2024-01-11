@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+public class ATM {
+    private int balance;
+    private int pin;
+
+    public ATM() {
+        this.balance = 1000;
+        this.pin = 1520;
+    }
+
+    public void checkBalance() {
+        System.out.println("Your balance is TK: " + this.balance);
+    }
+
+    public void withdrawCash() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the amount to withdraw: ");
+        int withdrawAmount = scanner.nextInt();
+        if (withdrawAmount % 100 != 0) {
+            System.out.println("Please enter the amount in multiples of 100");
+        } else if (withdrawAmount > (this.balance - 500)) {
+            System.out.println("Insufficient balance");
+        } else {
+            this.balance -= withdrawAmount;
+            System.out.println("Please collect cash");
+            System.out.println("Your current balance is TK: " + this.balance);
+        }
+    }
+
+    public void depositCash() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the amount to deposit: ");
+        int depositAmount = scanner.nextInt();
+        this.balance += depositAmount;
+        System.out.println("Your balance is TK: " + this.balance);
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your secret PIN number: ");
+        int enteredPin = scanner.nextInt();
+        if (enteredPin != this.pin) {
+            System.out.println("Invalid PIN");
+            return;
+        }
+        while (true) {
+            System.out.println("\n********Welcome to XYZ Bank ATM Service***********");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Withdraw Cash");
+            System.out.println("3. Deposit Cash");
+            System.out.println("4. Quit");
+            System.out.println("********************************************");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            if (choice == 1) {
+                checkBalance();
+            } else if (choice == 2) {
+                withdrawCash();
+            } else if (choice == 3) {
+                depositCash();
+            } else if (choice == 4) {
+                System.out.println("Thank you for using XYZ Bank ATM");
+                break;
+            } else {
+                System.out.println("Invalid choice");
+            }
+            System.out.print("Do you wish to have another transaction? (y/n): ");
+            String anotherTransaction = scanner.next();
+            if (!anotherTransaction.toLowerCase().equals("y")) {
+                break;
+            }
+        }
+        System.out.println("Thanks for using XYZ Bank ATM Service");
+    }
+
+    public static void main(String[] args) {
+        ATM atm = new ATM();
+        atm.run();
+    }
+}
+
+
