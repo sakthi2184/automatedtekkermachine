@@ -1,1 +1,1 @@
-# automatedtekkermachine
+# automatedtellermachine
